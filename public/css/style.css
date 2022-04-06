@@ -1,0 +1,402 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+
+.user-midi {
+  color: #fb8dc4;
+  text-transform: uppercase;
+  font-size: 2rem;
+}
+
+.external-midi {
+  color: #59ABE3;
+  text-transform: uppercase;
+  font-size: 2rem;
+}
+
+#midi-data {
+  list-style: none;
+  height: 300px;
+  overflow: hidden;
+  padding-top: 20px;
+  /* tilt styles  */
+  -webkit-transform: perspective(400px) rotateX(50deg);
+  -webkit-transform-style: preserve-3d;
+  opacity: .8;
+  width: 640px;
+  text-align: center;
+  margin: -12px auto;
+}
+
+#midi-data li {
+  -webkit-transform: perspective(400px) rotateX(-30deg);
+  -webkit-transform-style: preserve-3d;
+  background-color: #FF69B4;
+  color: #fff;
+}
+
+#midi-data li:after {
+  content: " ";
+  display: block;
+  background: #F2E0FA;
+  height: 29px;
+  width: 100%;
+  position: absolute;
+  bottom: -29px;
+}
+
+body {
+  /* background: url(/images/vw-bg.jpg) no-repeat center center fixed; */
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: 'Ubuntu', sans-serif;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.piano {
+  padding-left: 1px;
+  margin-left: 12px;
+  margin-bottom: 180px;
+  opacity: .9;
+  -webkit-transform: perspective(500px) rotateX(20deg);
+  -webkit-transform-style: preserve-3d;
+}
+
+.piano-key {
+  float: left;
+  border-radius: 0 0 4px 4px;
+}
+
+.piano-key-natural {
+  background: #f5f5f5 -webkit-linear-gradient(top, transparent, #fff, transparent);
+  background: #f5f5f5 linear-gradient(to bottom, transparent, #fff, transparent);
+  border: 1px solid;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.15);
+  border-right-width: 0;
+  border-bottom-width: 2px;
+  height: 120px;
+  width: 30px;
+  margin-left: -1px;
+}
+.piano-key-natural:last-child {
+  border-right-width: 1px;
+}
+.piano-key-natural.piano-key-pressed, .piano-key-natural:active {
+  background: #FF69B4 -webkit-linear-gradient(top, #fb8dc4, transparent, #fb8dc4);
+  background: #FF69B4 linear-gradient(to bottom, #fb8dc4, transparent, #fb8dc4);
+  border-bottom-width: 1px;
+  border-left-color: rgb(233,212,96,0.15);
+  box-shadow: inset -2px 0 0 0 rgba(0, 0, 0, 0.15), inset 1px 0 0 0 rgba(0, 0, 0, 0.15);
+}
+
+/* adding external midi input class, blue */
+.piano-key-natural.piano-key-pressed-external, .piano-key-natural:active {
+  background: #59ABE3 -webkit-linear-gradient(top, #6fbdf2, transparent, #6fbdf2);
+  background: #59ABE3 linear-gradient(to bottom, #6fbdf2, transparent, #6fbdf2);
+  border-bottom-width: 1px;
+  border-left-color: rgb(89,171,227,0.15);
+  box-shadow: inset -2px 0 0 0 rgba(0, 0, 0, 0.15), inset 1px 0 0 0 rgba(0, 0, 0, 0.15);
+}
+
+.piano-key-accidental {
+  background: #111 -webkit-linear-gradient(top, transparent, rgba(255, 255, 255, 0.075), transparent);
+  background: #111 linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.075), transparent);
+  box-shadow: inset 0 0 0 1px #000, inset 0 -4px 0 1px #000, inset 0 -5px 0 1px rgba(255, 255, 255, 0.2);
+  height: 66px;
+  width: 20px;
+  position: relative;
+  left: -10px;
+  margin-right: -20px;
+}
+
+.piano-key-accidental.piano-key-pressed, .piano-key-accidental:active {
+  background: #FF69B4 -webkit-linear-gradient(top, transparent, rgba(251,141,196,0.5));
+  background: #FF69B4 linear-gradient(to bottom, transparent, rgba(251,141,196,0.5));
+  box-shadow: inset 0 0 0 1px #FF69B4, inset 0 -2px 0 1px #FF69B4, inset 0 -3px 0 1px rgba(251,141,196,0.2);
+}
+
+/* adding class for external accidental key press */
+.piano-key-accidental.piano-key-pressed-external, .piano-key-accidental:active {
+  background: #C5EFF7 -webkit-linear-gradient(top, transparent, rgba(89,171,227,0.5));
+  background: #C5EFF7 linear-gradient(to bottom, transparent, rgba(89,171,227,0.5));
+  box-shadow: inset 0 0 0 1px #C5EFF7, inset 0 -2px 0 1px #C5EFF7, inset 0 -3px 0 1px rgba(89,171,227,0.2);
+}
+
+
+.settingsBar {
+    padding-top: 8px;
+    font: 14px "Open Sans", "Lucida Grande", "Arial", sans-serif;
+    position: relative;
+    vertical-align: middle;
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+
+.settingsBar .stepper {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    text-align: center;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.settingsBar .stepper:hover {
+    background: #ff656c;
+    color: #fff;
+}
+
+/*  */
+
+.volume-text {
+    font-size: 1 em;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.volume-settings {
+    display: flex;
+    justify-content: space-between;
+}
+
+.volume-settings .adjust-volume-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 40px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    text-align: center;
+    cursor: pointer;
+}
+
+.volume-settings .adjust-volume-btn:hover {
+    background: #fa545c;
+    color: #fff;
+}
+.volume-settings .decrease-volume {
+    line-height: 25px;
+}
+.volume-settings .increase-volume {
+    line-height: 32px;
+}
+
+.volume-display {
+    width: 100%;
+    text-align: center;
+    color: #fa545c;
+    font-weight: bold;
+}
+.volume-display .volume-value {
+    font-size: 4em;
+}
+
+.left {
+width: 20%;
+position: absolute;
+left: 0;
+display: table-cell;
+vertical-align: middle;
+}
+
+.left span, .left input {
+vertical-align: middle;
+}
+
+
+.right {
+width: 50%;
+position: absolute;
+right: 0;
+display: table-cell;
+vertical-align: middle;
+}
+
+.right span {
+vertical-align: middle;
+}
+
+.right input {
+vertical-align: baseline;
+}
+
+.waveform-settings {
+    display: flex;
+    justify-content: space-between;
+}
+
+.waveform-settings .adjust-waveform-btn {
+    width: 70px;
+    height: 40px;
+    font-size: 15px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    text-align: center;
+    cursor: pointer;
+    line-height: 40px;
+}
+
+.waveform-settings .adjust-waveform-btn:hover {
+    background: #fa545c;
+    color: #fff;
+}
+
+.waveform-display {
+    width: 50%;
+    text-align: center;
+    color: #fa545c;
+    font-weight: bold;
+}
+
+.waveform-display .waveform-name {
+    font-size: 4em;
+}
+
+
+.metronome {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 250px;
+    justify-content: space-between;
+}
+
+.bpm-display {
+    width: 100%;
+    text-align: center;
+    color: #fa545c;
+    font-weight: bold;
+}
+
+.bpm-display .tempo {
+    font-size: 4em;
+}
+
+.tempo-text {
+    font-size: 1 em;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.tempo-settings {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tempo-settings .adjust-tempo-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 40px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    text-align: center;
+    cursor: pointer;
+}
+.tempo-settings .adjust-tempo-btn:hover {
+    background: #fa545c;
+    color: #fff;
+}
+.tempo-settings .decrease-tempo {
+    line-height: 25px;
+}
+.tempo-settings .increase-tempo {
+    line-height: 25px;
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+    background-color: transparent;
+    width: 70%;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fa545c;
+    cursor: pointer;
+    margin-top: -8px;
+}
+input[type=range]::-moz-range-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fa545c;
+    cursor: pointer;
+    border: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 1px;
+    background: #ddd;
+}
+
+input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 1px;
+    background: #ddd;
+}
+
+.start-stop {
+    width: 50px;
+    height: 50px;
+    font-size: 1 em;
+    text-align: center;
+    background: #fa545c;
+    border-radius: 50%;
+    color: #fff;
+    line-height: 50px;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.start-stop:hover {
+    background: #ff656c;
+}
+.measures {
+    display: flex;
+    justify-content: center;
+}
+.measures .stepper {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    text-align: center;
+    margin: 0 5px;
+    cursor: pointer;
+}
+.measures .stepper:hover {
+    background: #ff656c;
+    color: #fff;
+}
+.measures .add-beats {
+    line-height: 20px;
+}
+
+.beats-per-measure-text {
+    text-align: center;
+    font-size: 0.7 em;
+    text-transform: uppercase;
+}
