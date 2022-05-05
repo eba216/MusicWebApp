@@ -15,9 +15,11 @@ import Timer from './timer.js';
     mainGainNode.gain.value = volumeControl.value/10;
     var midi, data;
 
-    let sineTerms = new Float32Array([0, 0, 1, 0, 1]);
-    let cosineTerms = new Float32Array(sineTerms.length);
-    let customWaveform = audioContext.createPeriodicWave(cosineTerms, sineTerms);
+    var sineTerms = new Float32Array([0, 0, 1, 0, 1]); 
+    console.log(sineTerms);
+    var cosineTerms = new Float32Array(sineTerms.length);
+    console.log(cosineTerms);
+    var customWaveform = audioContext.createPeriodicWave(cosineTerms, sineTerms);
     
     // start talking to MIDI controller
     if (navigator.requestMIDIAccess) {
@@ -74,14 +76,14 @@ import Timer from './timer.js';
 
     ////////////////// Sound Section /////////////////////////////
 
-    var type = "sawtooth"; //wavePicker.options[wavePicker.selectedIndex].value;
+    var type = "sawtooth";
     const waves = document.querySelectorAll("div.adjust-waveform-btn");
     let waveformText = document.querySelector(".waveform-name");
     const sineWave = waves[0];
     const squareWave = waves[1];
     const triangleWave = waves[2];
     const sawtoothWave = waves[3];
-    const customWave = waves[4];
+    const randomWave = waves[4];
     console.log("wave start " + type);
     waveformText.textContent = "Sawtooth"
 
@@ -131,10 +133,15 @@ import Timer from './timer.js';
     }, true);
 
 
-    customWave.addEventListener('click', () => {
+    randomWave.addEventListener('click', () => {
         console.log("wave before " + type);
-        type = "custom";
-        waveformText.textContent = "Custom";
+        type = "random";
+        waveformText.textContent = "Random";
+        sineTerms = Array(7).fill().map(() => Math.random()); 
+        cosineTerms =  Array(7).fill().map(() => Math.random()); 
+
+        customWaveform = audioContext.createPeriodicWave(cosineTerms, sineTerms);
+
         console.log("wave after " + type);
         for (const freq in oscilators) {
             oscilators[freq].setPeriodicWave(customWaveform);
@@ -166,7 +173,7 @@ import Timer from './timer.js';
         var osc = oscilators[frequency] = audioContext.createOscillator();
         osc.connect(mainGainNode);
         var vol = (velocity/ 127).toFixed(2);
-        if (type == "custom") {
+        if (type == "random") {
             osc.setPeriodicWave(customWaveform);
         } else {
             console.log("old wave " + type);
